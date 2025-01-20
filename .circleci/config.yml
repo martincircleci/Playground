@@ -1,17 +1,17 @@
 version: 2.1
-orbs:
-  android: circleci/android@1.0.2
+
 jobs:
   build-and-test:
-    executor:
-      name: android/android-machine
+    docker:
+      - image: "cimg/node:current"
     steps:
       - checkout
       - run:
           name: Message
-          command: echo "Only Master"
+          command: node --version
 
 workflows:
+  version: 2
   sample:
     jobs:
       - build-and-test
