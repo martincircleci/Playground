@@ -10,7 +10,7 @@ jobs:
           name: Setup FUSE
           command: |
             # Example of setting up a FUSE mount
-            mkdir -p /mnt/my-fuse
+            sudo mkdir -p /mnt/my-fuse
             ./my-fuse-program /mnt/my-fuse
       - run:
           name: Perform Operations
