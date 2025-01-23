@@ -1,17 +1,31 @@
 version: 2.1
-orbs:
-  android: circleci/android@1.0.3
+
 jobs:
-  build-and-test:
-    executor:
-      name: android/android-machine
+  build:
+    docker:
+      - image: circleci/python:3.8
     steps:
       - checkout
       - run:
-          name: Message
-          command: echo "Only Master"
+          name: Setup FUSE
+          command: |
+            # Example of setting up a FUSE mount
+            mkdir -p /mnt/my-fuse
+            ./my-fuse-program /mnt/my-fuse
+      - run:
+          name: Perform Operations
+          command: |
+            echo "Running tasks that need the FUSE mount..."
+
+      # Ensure teardown occurs to clean up FUSE mounts
+      - run:
+          name: Teardown FUSE
+          command: |
+            echo "Unmounting FUSE..."
+            fusermount -u /mnt/my-fuse || umount /mnt/my-fuse
 
 workflows:
-  sample:
+  version: 2
+  build-and-teardown:
     jobs:
-      - build-and-test
+      - build
