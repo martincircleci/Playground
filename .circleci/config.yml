@@ -1,17 +1,17 @@
 version: 2.1
-orbs:
-  android: circleci/android@1.0.3
+
 jobs:
-  build-and-test:
-    executor:
-      name: android/android-machine
+  echo-project-slug:
+    docker:
+      - image: circleci/node:14
     steps:
       - checkout
       - run:
-          name: Message
-          command: echo "Only Master"
+          name: Echo Project Slug
+          command: echo "The project slug is: << pipeline.project.slug >>"
 
 workflows:
-  sample:
+  version: 2
+  test:
     jobs:
-      - build-and-test
+      - echo-project-slug
