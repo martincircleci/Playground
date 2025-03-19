@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Echo Project Slug
-          command: echo "The project slug is: << pipeline.project.slug >>"
+          command: echo << pipeline.project.slug >>
 
 workflows:
   version: 2
