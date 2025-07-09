@@ -6,6 +6,16 @@ jobs:
       - image: "cimg/node:current"
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Message
+          command: node --version
+  build-and-testtwo:
+    docker:
+      - image: "cimg/node:current"
+    steps:
+      - checkout
       - run:
           name: Message
           command: node --version
@@ -15,3 +25,7 @@ workflows:
   sample:
     jobs:
       - build-and-test
+  sampletwo:
+    jobs:
+      - build-and-testtwo
+  
