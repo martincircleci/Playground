@@ -1,17 +1,33 @@
 version: 2.1
-orbs:
-  android: circleci/android@1.0.3
+
 jobs:
   build-and-test:
-    executor:
-      name: android/android-machine
+    docker:
+      - image: "cimg/node:current"
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Message
+          command: node --version
+  build-and-testtwo:
+    docker:
+      - image: "cimg/node:current"
     steps:
       - checkout
       - run:
           name: Message
-          command: echo "Only Master"
+          command: node --version
+      - run:
+          name: Sleep
+          command: sleep 5m
 
 workflows:
+  version: 2
   sample:
     jobs:
       - build-and-test
+  sampletwo:
+    jobs:
+      - build-and-testtwo
