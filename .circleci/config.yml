@@ -1,16 +1,15 @@
 version: 2.1
 
 jobs:
-  build-and-test:
-    docker:
-      - image: "cimg/node:current"
+  build-mac:
+    macos:
+      xcode: 26.4.0
+    resource_class: m4pro.medium
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Message
-          command: node --version
+          command: echo "It works"
   build-and-testtwo:
     docker:
       - image: "cimg/node:current"
@@ -24,7 +23,7 @@ workflows:
   version: 2
   sample:
     jobs:
-      - build-and-test
+      - build-mac
   sampletwo:
     jobs:
       - build-and-testtwo
