@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build: # name of your job
+  build-it: # name of your job
     machine:
       image: windows-default
       shell: powershell.exe -ExecutionPolicy Bypass
@@ -14,4 +14,4 @@ jobs:
 workflows:
   my-workflow:
       jobs:
-            - build
+            - build-it
